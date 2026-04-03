@@ -1,0 +1,17 @@
+    <section class="section-head" style="padding:0 0 10px 0;">
+        <div>
+            <p class="eyebrow"><?php echo $currentCategoryName ? 'Categoría seleccionada' : 'Catálogo completo'; ?></p>
+            <h2><?php echo $currentCategoryName ? $currentCategoryName : 'Perfumes listos para ti'; ?></h2>
+            <p class="lead" style="color:#cbd5e1; max-width:720px;">
+                <?php if ($currentCategoryName): ?>
+                    Fragancias de la línea <?php echo $currentCategoryName; ?>, listas para elegir.
+                <?php else: ?>
+                    Explora nuestras lociones premium. Imágenes optimizadas para ver el frasco completo en cualquier pantalla.
+                <?php endif; ?>
+            </p>
+        </div>
+        <div class="hero-summary" style="max-width:360px;">
+            <div><strong><?php echo $result->num_rows; ?></strong><small>Perfumes</small></div>
+            <div><strong><?php echo $conn->query("SELECT COUNT(*) c FROM perfumeria_total WHERE tipo='producto' AND descuento>0")->fetch_assoc()['c']; ?></strong><small>Con descuento</small></div>
+        </div>
+    </section>
