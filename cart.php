@@ -31,6 +31,10 @@ session_start();
             include 'db_connect.php';
             $conn->query("ALTER TABLE perfumeria_total ADD COLUMN IF NOT EXISTS descuento DECIMAL(5,2) DEFAULT 0.00");
 
+            function format_cop($value) {
+                return '$' . number_format((float)$value, 0, ',', '.');
+            }
+
             // Reset completo del carrito
             if (isset($_GET['reset'])) {
                 unset($_SESSION['shopping_cart']);
@@ -86,7 +90,7 @@ session_start();
                     $wa_message .= "⭐ Producto: " . $product['name'] . "\n";
                     if (!empty($product['discount'])) { $wa_message .= "🎯 Descuento: -" . $product['discount'] . "%\n"; }
                     $wa_message .= $product['image'] . "\n";
-                    $wa_message .= "💵 Precio: $" . number_format($product['price'],2) . "\n";
+                    $wa_message .= "💵 Precio: " . format_cop($product['price']) . "\n";
                     $wa_message .= "--------------------------\n";
 
                     echo "<tr>";
@@ -96,22 +100,22 @@ session_start();
                     echo "<td>";
                     if (!empty($product['discount'])) {
                         $original = $product['price'] / (1 - ($product['discount'] / 100));
-                        echo "<span class='old-price'>$" . number_format($original,2) . "</span> ";
+                        echo "<span class='old-price'>" . format_cop($original) . "</span> ";
                     }
-                    echo "$" . number_format($product['price'],2);
+                    echo format_cop($product['price']);
                     if (!empty($product['discount'])) {
                         echo " <span class='badge badge-offer'>-" . number_format($product['discount'], 2) . "%</span>";
                     }
                     echo "</td>";
-                    echo "<td style='color:var(--gold); font-weight:bold;'>$" . number_format($subtotal,2) . "</td>";
+                    echo "<td style='color:var(--gold); font-weight:bold;'>" . format_cop($subtotal) . "</td>";
                     echo "<td><a href='?remove=" . $product['id'] . "' class='btn-outline'>Eliminar</a></td>";
                     echo "</tr>";
                 }
 
-                $wa_message .= "\n✅ Total a pagar: $" . number_format($total, 2);
+                $wa_message .= "\n✅ Total a pagar: " . format_cop($total);
                 $wa_url = "https://wa.me/3135086534?text=" . rawurlencode($wa_message);
 
-                echo "<tr style='background:rgba(255,255,255,0.05);'><td colspan='3' align='right'><strong>Total de productos: $total_items</strong></td><td align='right'><strong>Total a Pagar:</strong></td><td style='font-size:1.5rem; color:var(--gold);'><strong>$" . number_format($total, 2) . "</strong></td><td></td></tr>";
+                echo "<tr style='background:rgba(255,255,255,0.05);'><td colspan='3' align='right'><strong>Total de productos: $total_items</strong></td><td align='right'><strong>Total a Pagar:</strong></td><td style='font-size:1.5rem; color:var(--gold);'><strong>" . format_cop($total) . "</strong></td><td></td></tr>";
                 echo "</table>";
                 echo "<div style='text-align:right; display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;'>";
                 echo "<a href='?reset=1' class='btn-outline'>Nueva compra</a>";

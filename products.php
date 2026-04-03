@@ -9,6 +9,10 @@ $schemaUpdates = [
 ];
 foreach ($schemaUpdates as $sql) { $conn->query($sql); }
 
+function format_cop($value) {
+    return '$' . number_format((float)$value, 0, ',', '.');
+}
+
 // Datos base y filtro de categoría
 $categories = [];
 $categoryRes = $conn->query("SELECT id, nombre_titulo FROM perfumeria_total WHERE tipo='categoria' ORDER BY nombre_titulo");
@@ -98,8 +102,8 @@ if ($categoryFilter > 0) {
                         <h3><?php echo $row['name']; ?></h3>
                         <p class="description"><?php echo strlen($desc) > 90 ? substr($desc,0,90).'…' : $desc; ?></p>
                         <div class="price-block">
-                            <?php if ($discount > 0): ?><span class="old-price">$<?php echo number_format($row['price'], 2); ?></span><?php endif; ?>
-                            <span class="price">$<?php echo number_format($finalPrice, 2); ?></span>
+                            <?php if ($discount > 0): ?><span class="old-price"><?php echo format_cop($row['price']); ?></span><?php endif; ?>
+                            <span class="price"><?php echo format_cop($finalPrice); ?></span>
                         </div>
                         <div class="card-actions">
                             <a href="cart.php?id=<?php echo $row['id']; ?>" class="btn-gold">Agregar al carrito</a>

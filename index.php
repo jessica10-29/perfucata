@@ -10,6 +10,10 @@ $schemaUpdates = [
 ];
 foreach ($schemaUpdates as $sql) { $conn->query($sql); }
 
+function format_cop($value) {
+    return '$' . number_format((float)$value, 0, ',', '.');
+}
+
 // Parámetros de búsqueda
 $q = isset($_GET['q']) ? trim($_GET['q']) : '';
 $category = isset($_GET['category']) ? intval($_GET['category']) : 0;
@@ -45,6 +49,72 @@ if ($doSearch) {
     $stmt->execute();
     $results = $stmt->get_result();
 }
+
+// Productos destacados del carrusel con precio real
+$carouselSeeds = [
+    [
+        'image' => 'images/perfumes/femeninos/chanel-no5.jpg',
+        'alt' => 'Perfume femenino Chanel No. 5',
+        'fallback_name' => 'Chanel No. 5 Eau de Parfum 100ml',
+        'fallback_price' => 829990.00
+    ],
+    [
+        'image' => 'images/perfumes/femeninos/dior-jadore.jpg',
+        'alt' => 'Perfume femenino Dior Jadore',
+        'fallback_name' => 'Dior Jadore Eau de Parfum 100ml',
+        'fallback_price' => 739900.00
+    ],
+    [
+        'image' => 'images/perfumes/masculinos/dior-sauvage.jpg',
+        'alt' => 'Perfume masculino Dior Sauvage',
+        'fallback_name' => 'Dior Sauvage Eau de Toilette 100ml',
+        'fallback_price' => 699000.00
+    ],
+    [
+        'image' => 'images/perfumes/masculinos/acqua-di-gio.jpg',
+        'alt' => 'Perfume masculino Acqua di Gio',
+        'fallback_name' => 'Acqua di Gio Pour Homme 100ml',
+        'fallback_price' => 429990.00
+    ],
+    [
+        'image' => 'images/perfumes/infantil/mustela-musti.png',
+        'alt' => 'Colonia infantil Mustela Musti',
+        'fallback_name' => 'Mustela Musti Eau de Soin 50ml',
+        'fallback_price' => 84900.00
+    ]
+];
+
+$carouselMap = [];
+$carouselPaths = array_column($carouselSeeds, 'image');
+if (!empty($carouselPaths)) {
+    $placeholders = implode(',', array_fill(0, count($carouselPaths), '?'));
+    $carouselQuery = "SELECT id, nombre_titulo, precio, descuento, clave_imagen FROM perfumeria_total WHERE tipo='producto' AND clave_imagen IN ($placeholders)";
+    $carouselStmt = $conn->prepare($carouselQuery);
+    $carouselTypes = str_repeat('s', count($carouselPaths));
+    $carouselStmt->bind_param($carouselTypes, ...$carouselPaths);
+    $carouselStmt->execute();
+    $carouselRes = $carouselStmt->get_result();
+    while ($carouselRow = $carouselRes->fetch_assoc()) {
+        $carouselMap[$carouselRow['clave_imagen']] = $carouselRow;
+    }
+}
+
+$carouselItems = [];
+foreach ($carouselSeeds as $seed) {
+    $dbItem = $carouselMap[$seed['image']] ?? null;
+    $basePrice = $dbItem ? floatval($dbItem['precio']) : floatval($seed['fallback_price']);
+    $discount = $dbItem ? floatval($dbItem['descuento']) : 0;
+    $finalPrice = $discount > 0 ? $basePrice * (1 - ($discount / 100)) : $basePrice;
+    $carouselItems[] = [
+        'id' => $dbItem['id'] ?? 0,
+        'image' => $seed['image'],
+        'alt' => $seed['alt'],
+        'name' => $dbItem['nombre_titulo'] ?? $seed['fallback_name'],
+        'price' => $finalPrice,
+        'base_price' => $basePrice,
+        'discount' => $discount
+    ];
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,114 +129,109 @@ if ($doSearch) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-<header>
-    <h1>Aura Essence</h1>
-    <nav>
-        <a href="index.php" class="active">Inicio</a>
-        <a href="products.php">Fragancias</a>
-        <a href="blog.php">Blog</a>
-        
-    </nav>
+<header class="site-header home-header">
+    <span class="header-spark spark-one" aria-hidden="true"></span>
+    <span class="header-spark spark-two" aria-hidden="true"></span>
+    <span class="header-spark spark-three" aria-hidden="true"></span>
+    <span class="header-scent scent-one" aria-hidden="true"></span>
+    <span class="header-scent scent-two" aria-hidden="true"></span>
+    <div class="header-inner">
+        <h1>Aura Essence</h1>
+        <nav>
+            <a href="index.php" class="active">Inicio</a>
+            <a href="products.php">Fragancias</a>
+            <a href="blog.php">Blog</a>
+        </nav>
+    </div>
 </header>
 
-<main>
-    <section class="welcome hero">
-        <div class="hero-text">
-            <p class="eyebrow">Alta perfumería · Atención personalizada</p>
-            <h2 class="highlight-gold">Elegancia en cada gota</h2>
-            <p class="lead">En <strong>Aura Essence</strong> transformamos recuerdos en fragancias. Curamos aromas de autor y firmas globales para que tu presencia hable antes que las palabras.</p>
-            <div class="hero-cta">
-                <a class="btn-gold" href="#buscador">Buscar perfume</a>
-            </div>
-            <div class="stats-container">
-                <div><h4 class="highlight-gold plain">+15 Años</h4><p>De experiencia</p></div>
-                <div><h4 class="highlight-gold plain">100% Original</h4><p>Garantizado</p></div>
-                <div><h4 class="highlight-gold plain">Premium</h4><p>Marcas globales</p></div>
-            </div>
-        </div>
-        <div class="hero-badge">
-            <span>Fragancias curadas</span>
-            <strong><?php echo date('Y'); ?></strong>
-        </div>
+<main class="home-shell">
+    <section class="intro-copy">
+        <p class="eyebrow">Alta perfumería · Atención personalizada</p>
+        <h2 class="highlight-gold">Elegancia en cada gota</h2>
+        <p class="lead">En <strong>Aura Essence</strong> transformamos recuerdos en fragancias. Curamos aromas de autor y firmas globales para que tu presencia hable antes que las palabras.</p>
     </section>
 
-    <section class="carousel">
-        <div class="carousel-container">
-            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1200" alt="Fragancia premium con notas florales">
-            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1200" alt="Lujo y estilo en tu tocador">
-            <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=1200" alt="Esencias naturales selectas">
-            <img src="https://images.unsplash.com/photo-1512777576244-b846ac3d816f?auto=format&fit=crop&w=1200" alt="Colección real de perfumes">
-            <img src="https://images.unsplash.com/photo-1583467875263-d50dec37a88c?auto=format&fit=crop&w=1200" alt="Aromas exclusivos de autor">
-        </div>
-        <div class="carousel-dots pro-dots">
-            <button class="dot active" aria-label="Ir a la diapositiva 1"></button>
-            <button class="dot" aria-label="Ir a la diapositiva 2"></button>
-            <button class="dot" aria-label="Ir a la diapositiva 3"></button>
-            <button class="dot" aria-label="Ir a la diapositiva 4"></button>
-            <button class="dot" aria-label="Ir a la diapositiva 5"></button>
-            <div class="progress-track"><span class="progress-fill"></span></div>
-        </div>
-    </section>
+    <section class="intro-showcase" id="buscador">
+        <div class="panel-grid top-tools">
+            <aside class="category-panel glass-card">
+                <h3>Categorías</h3>
+                <ul class="category-list">
+                    <?php foreach ($categories as $cat): $stats = isset($catStats[$cat['id']]) ? $catStats[$cat['id']] : ['total'=>0,'ofertas'=>0]; ?>
+                        <li>
+                            <span><?php echo $cat['nombre_titulo']; ?></span>
+                            <div class="category-tags">
+                                <span class="chip muted">Disponibles: <?php echo $stats['total']; ?></span>
+                                <span class="chip">Ofertas: <?php echo $stats['ofertas']; ?></span>
+                            </div>
+                            <a class="btn-outline" href="products.php?category=<?php echo $cat['id']; ?>">Ver lociones</a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </aside>
 
-    <section class="panel-grid" id="buscador">
-        <aside class="category-panel glass-card">
-            <h3>Categorías</h3>
-            <ul class="category-list">
-                <?php foreach ($categories as $cat): $stats = isset($catStats[$cat['id']]) ? $catStats[$cat['id']] : ['total'=>0,'ofertas'=>0]; ?>
-                    <li>
-                        <span><?php echo $cat['nombre_titulo']; ?></span>
-                        <div class="category-tags">
-                            <span class="chip muted">Disponibles: <?php echo $stats['total']; ?></span>
-                            <span class="chip">Ofertas: <?php echo $stats['ofertas']; ?></span>
-                        </div>
-                        <a class="btn-outline" href="products.php?category=<?php echo $cat['id']; ?>">Ver lociones</a>
-                    </li>
+            <section class="search-panel glass-card" id="buscador-perfume">
+                <div class="search-head">
+                    <div>
+                        <p class="eyebrow">Encuentra tu aroma</p>
+                        <h3>Buscar lociones</h3>
+                        <p class="lead">Busca por nombre, categoría o disponibilidad para encontrar rápido el perfume ideal.</p>
+                    </div>
+                    <div class="search-total"><strong><?php echo $doSearch && $results ? $results->num_rows : count($allNames); ?></strong><small><?php echo $doSearch ? 'coincidencias' : 'en catálogo'; ?></small></div>
+                </div>
+                <form class="search-grid" method="GET" action="index.php">
+                    <label>
+                        <span>Nombre del perfume</span>
+                        <input list="perfume-names" type="search" name="q" placeholder="Ej. Sauvage, Chanel, Boss" value="<?php echo htmlspecialchars($q); ?>" />
+                        <datalist id="perfume-names">
+                            <?php foreach ($allNames as $n): ?>
+                                <option value="<?php echo htmlspecialchars($n); ?>"></option>
+                            <?php endforeach; ?>
+                        </datalist>
+                    </label>
+                    <label>
+                        <span>Categoría</span>
+                        <select name="category">
+                            <option value="0">Todas</option>
+                            <?php foreach ($categories as $cat): ?>
+                                <option value="<?php echo $cat['id']; ?>" <?php echo ($category == $cat['id']) ? 'selected' : ''; ?>><?php echo $cat['nombre_titulo']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Disponibilidad</span>
+                        <select name="availability">
+                            <option value="">Todas</option>
+                            <option value="Disponible" <?php echo ($availability === 'Disponible') ? 'selected' : ''; ?>>Disponible</option>
+                            <option value="Agotado" <?php echo ($availability === 'Agotado') ? 'selected' : ''; ?>>Agotado</option>
+                            <option value="En Espera" <?php echo ($availability === 'En Espera') ? 'selected' : ''; ?>>En espera</option>
+                        </select>
+                    </label>
+                    <div class="filter-actions">
+                        <button type="submit" class="btn-gold">Buscar</button>
+                        <a class="btn-outline" href="index.php">Limpiar</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <section class="carousel top-carousel">
+            <div class="carousel-container">
+                <?php foreach ($carouselItems as $item): ?>
+                    <div class="carousel-slide" style="--slide-image:url('<?php echo htmlspecialchars($item['image']); ?>')">
+                        <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['alt']); ?>">
+                        <span class="carousel-price-tag"><?php echo format_cop($item['price']); ?></span>
+                    </div>
                 <?php endforeach; ?>
-            </ul>
-        </aside>
-
-        <section class="search-panel glass-card">
-            <div class="search-head">
-                <div>
-                    <p class="eyebrow">Encuentra tu aroma</p>
-                    <h3>Buscador de perfumes</h3>
-                    <p class="lead">Busca por nombre, filtra por categoría o disponibilidad. Mostramos solo los perfumes que coinciden.</p>
-                </div>
-                <div class="search-total"><strong><?php echo $doSearch && $results ? $results->num_rows : count($allNames); ?></strong><small><?php echo $doSearch ? 'coincidencias' : 'en catálogo'; ?></small></div>
             </div>
-            <form class="search-grid" method="GET" action="index.php">
-                <label>
-                    <span>Nombre del perfume</span>
-                    <input list="perfume-names" type="search" name="q" placeholder="Ej. Sauvage, Chanel, Boss" value="<?php echo htmlspecialchars($q); ?>" />
-                    <datalist id="perfume-names">
-                        <?php foreach ($allNames as $n): ?>
-                            <option value="<?php echo htmlspecialchars($n); ?>"></option>
-                        <?php endforeach; ?>
-                    </datalist>
-                </label>
-                <label>
-                    <span>Categoría</span>
-                    <select name="category">
-                        <option value="0">Todas</option>
-                        <?php foreach ($categories as $cat): ?>
-                            <option value="<?php echo $cat['id']; ?>" <?php echo ($category == $cat['id']) ? 'selected' : ''; ?>><?php echo $cat['nombre_titulo']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </label>
-                <label>
-                    <span>Disponibilidad</span>
-                    <select name="availability">
-                        <option value="">Todas</option>
-                        <option value="Disponible" <?php echo ($availability === 'Disponible') ? 'selected' : ''; ?>>Disponible</option>
-                        <option value="Agotado" <?php echo ($availability === 'Agotado') ? 'selected' : ''; ?>>Agotado</option>
-                        <option value="En Espera" <?php echo ($availability === 'En Espera') ? 'selected' : ''; ?>>En espera</option>
-                    </select>
-                </label>
-                <div class="filter-actions">
-                    <button type="submit" class="btn-gold">Buscar</button>
-                    <a class="btn-outline" href="index.php">Limpiar</a>
-                </div>
-            </form>
+            <div class="carousel-dots pro-dots">
+                <button class="dot active" aria-label="Ir a la diapositiva 1"></button>
+                <button class="dot" aria-label="Ir a la diapositiva 2"></button>
+                <button class="dot" aria-label="Ir a la diapositiva 3"></button>
+                <button class="dot" aria-label="Ir a la diapositiva 4"></button>
+                <button class="dot" aria-label="Ir a la diapositiva 5"></button>
+                <div class="progress-track"><span class="progress-fill"></span></div>
+            </div>
         </section>
     </section>
 
@@ -198,8 +263,8 @@ if ($doSearch) {
                         <?php $desc = $row['description'] ?? ''; ?>
                         <p class="description"><?php echo strlen($desc) > 90 ? substr($desc,0,90).'…' : $desc; ?></p>
                         <div class="price-block">
-                            <?php if ($discount > 0): ?><span class="old-price">$<?php echo number_format($row['price'], 2); ?></span><?php endif; ?>
-                            <span class="price">$<?php echo number_format($finalPrice, 2); ?></span>
+                            <?php if ($discount > 0): ?><span class="old-price"><?php echo format_cop($row['price']); ?></span><?php endif; ?>
+                            <span class="price"><?php echo format_cop($finalPrice); ?></span>
                         </div>
                         <div class="card-actions">
                             <a href="cart.php?id=<?php echo $row['id']; ?>" class="btn-gold">Agregar al carrito</a>
@@ -222,8 +287,8 @@ if ($doSearch) {
     <a href="https://www.tiktok.com/@pao.1324" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
 </section>
 
-<footer>
-    <p>&copy; <?php echo date("Y"); ?> Aura Essence - El arte de la perfumería de lujo.</p>
+<footer class="home-footer">
+    <p>&copy; Aura Essence - El arte de la perfumería de lujo.</p>
 </footer>
 
 <a href="https://wa.me/3135086534?text=Hola! Me gustaría hacer una consulta general." class="whatsapp-float" target="_blank" aria-label="Escríbenos por WhatsApp">
@@ -231,7 +296,7 @@ if ($doSearch) {
 </a>
 <script>
     const container = document.querySelector('.carousel-container');
-    const slides = Array.from(container.querySelectorAll('img'));
+    const slides = Array.from(container.querySelectorAll('.carousel-slide'));
     const dots = Array.from(document.querySelectorAll('.dot'));
     const progressFill = document.querySelector('.progress-fill');
     let index = 0; let slideInterval;
@@ -243,4 +308,3 @@ if ($doSearch) {
 </body>
 </html>
 <?php if (isset($stmt)) $stmt->close(); $conn->close(); ?>
-

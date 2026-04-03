@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <?php
+    function format_cop($value) {
+        return '$' . number_format((float)$value, 0, ',', '.');
+    }
+    ?>
     <header>
         <h1>Detalles de la Fragancia</h1>
         <nav>
@@ -59,9 +64,9 @@
                 echo "<div class='price-block'>";
                 if ($discount > 0) {
                     echo "<span class='badge badge-offer'>-" . number_format($row['descuento'], 2) . "%</span>";
-                    echo "<span class='old-price'>$" . number_format($row["price"], 2) . "</span>";
+                    echo "<span class='old-price'>" . format_cop($row["price"]) . "</span>";
                 }
-                echo "<span class='price'>$" . number_format($finalPrice, 2) . "</span>";
+                echo "<span class='price'>" . format_cop($finalPrice) . "</span>";
                 echo "</div>";
                 echo "<div class='card-actions'>";
                 echo "<a href='cart.php?id=" . $row["id"] . "' class='btn-gold'>Agregar al carrito</a>";
