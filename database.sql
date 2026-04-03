@@ -32,41 +32,41 @@ SET @cat_infantil   = (SELECT id FROM perfumeria_total WHERE tipo='categoria' AN
 INSERT INTO perfumeria_total (tipo, nombre_titulo, clave_imagen, contenido_texto) VALUES
 ('blog', 'Secretos de Duracion', 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800', 'Para que tu fragancia dure mas, aplicala en puntos de pulso.');
 
--- Femeninos (10)
+-- Femeninos (10) con imagenes locales reales de frascos
 INSERT INTO perfumeria_total (tipo, nombre_titulo, contenido_texto, precio, clave_imagen, relacion_id, estado) VALUES
-('producto', 'Chanel No. 5', 'Iconico floral aldehido con un perfil elegante y atemporal.', 150.00, 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'La Vie Est Belle', 'Iris, praline y vainilla con salida dulce y femenina.', 110.00, 'https://images.unsplash.com/photo-1525286116112-b59af11adad1?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'Good Girl', 'Cacao, jazmin y haba tonka en una estela sensual.', 125.00, 'https://images.unsplash.com/photo-1524594154908-edd335c7e4c5?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'YSL Libre', 'Lavanda, azahar y vainilla en un floral moderno.', 130.00, 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'Jadore', 'Bouquet floral luminoso con notas suaves y elegantes.', 145.00, 'https://images.unsplash.com/photo-1506617420156-8e4536971650?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'Gucci Bloom', 'Tuberosa y jazmin natural con aire fresco y limpio.', 105.00, 'https://images.unsplash.com/photo-1515377906489-17c72b32e99f?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'Bright Crystal', 'Granada, peonia y magnolia con firma fresca.', 85.00, 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'Flowerbomb', 'Explosion floral gourmand con fondo dulce.', 140.00, 'https://images.unsplash.com/photo-1498842812179-c81beecf902c?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'Daisy', 'Fresco juvenil con fresia, violeta y frutas suaves.', 95.00, 'https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible'),
-('producto', 'Burberry Her', 'Grosella negra y ambar con toque afrutado moderno.', 120.00, 'https://images.unsplash.com/photo-1527515545085-5db817172677?auto=format&fit=crop&w=900&q=80', @cat_femeninos, 'Disponible');
+('producto', 'Chanel No. 5 Eau de Parfum 100ml', 'Floral aldehidico clasico con rosa, ylang-ylang y fondo avainillado. Una referencia elegante y atemporal para mujer.', 158.00, 'images/perfumes/femeninos/chanel-no5.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Chanel No. 5 Eau de Parfum 50ml', 'Version femenina de perfil sofisticado, con salida limpia y un corazon floral muy reconocible.', 118.00, 'images/perfumes/femeninos/chanel-no5.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Dior Jadore Eau de Parfum 100ml', 'Bouquet floral luminoso con jazmin, rosa y acordes suaves que dejan una estela femenina y elegante.', 165.00, 'images/perfumes/femeninos/dior-jadore.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Dior Jadore Eau de Parfum 50ml', 'Fragancia floral radiante, ideal para quien busca un perfume clasico, refinado y facil de reconocer.', 128.00, 'images/perfumes/femeninos/dior-jadore.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Givenchy Irresistible Eau de Parfum 80ml', 'Rosa suave, notas afrutadas y almizcles delicados en un perfume moderno, femenino y muy limpio.', 128.00, 'images/perfumes/femeninos/givenchy-irresistible.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Givenchy LInterdit Eau de Parfum 80ml', 'Azahar, nardo y fondo amaderado en una composicion elegante, intensa y muy femenina.', 132.00, 'images/perfumes/femeninos/givenchy-linterdit.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Carolina Herrera 212 Sexy Women 100ml', 'Perfume calido con vainilla, almizcle y un toque dulce que se siente sensual y sofisticado.', 105.00, 'images/perfumes/femeninos/carolina-herrera-212-sexy.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Carolina Herrera 212 Sexy Women 60ml', 'Version practica del 212 Sexy, con perfil femenino, dulce y elegante para dia o noche.', 88.00, 'images/perfumes/femeninos/carolina-herrera-212-sexy.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Avon Rare Pearls Eau de Parfum 50ml', 'Floral suave con matices empolvados y un acabado delicado para uso diario.', 35.00, 'images/perfumes/femeninos/avon-rare-pearls.jpg', @cat_femeninos, 'Disponible'),
+('producto', 'Avon Rare Pearls Eau de Parfum 100ml', 'Aroma femenino clasico con sensacion limpia, elegante y ligera para cualquier momento.', 48.00, 'images/perfumes/femeninos/avon-rare-pearls.jpg', @cat_femeninos, 'Disponible');
 
--- Masculinos (10)
+-- Masculinos (10) con imagenes locales reales de frascos
 INSERT INTO perfumeria_total (tipo, nombre_titulo, contenido_texto, precio, clave_imagen, relacion_id, estado) VALUES
-('producto', 'Sauvage', 'Bergamota, pimienta y ambroxan con perfil intenso.', 115.00, 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=900&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'Bleu de Chanel', 'Citrico amaderado elegante y muy versatil.', 150.00, 'https://images.unsplash.com/photo-1512499617640-c2f999098c01?auto=format&fit=crop&w=900&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'Acqua di Gio', 'Acuatico fresco y limpio para uso diario.', 115.00, 'https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=900&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'Invictus', 'Notas marinas y laurel con salida energetica.', 95.00, 'https://images.unsplash.com/photo-1527515545085-5db817172677?auto=format&fit=crop&w=900&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'One Million', 'Canela, cuero y ambar con presencia dulce.', 95.00, 'https://images.unsplash.com/photo-1523825036634-aab3f4fb0b66?auto=format&fit=crop&w=900&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'YSL Y', 'Salvia, lavanda y maderas con aire moderno.', 130.00, 'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'Boss Bottled', 'Manzana, canela y vetiver con tono elegante.', 90.00, 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'Versace Eros', 'Menta, manzana verde y vainilla con fuerza.', 95.00, 'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=901&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'Prada Luna Rossa', 'Lavanda fresca y ambar gris en un perfil limpio.', 110.00, 'https://images.unsplash.com/photo-1512499617640-c2f999098c01?auto=format&fit=crop&w=901&q=80', @cat_masculinos, 'Disponible'),
-('producto', 'Montblanc Explorer', 'Bergamota y vetiver con fondo amaderado.', 85.00, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=901&q=80', @cat_masculinos, 'Disponible');
+('producto', 'Dior Sauvage Eau de Toilette 100ml', 'Bergamota fresca, pimienta y fondo ambarado en una fragancia masculina intensa y moderna.', 140.00, 'images/perfumes/masculinos/dior-sauvage.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'Dior Sauvage Eau de Toilette 60ml', 'Formato ideal para uso diario con salida citrica, presencia elegante y secado limpio.', 105.00, 'images/perfumes/masculinos/dior-sauvage.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'Acqua di Gio Pour Homme 100ml', 'Acorde marino, citrico y limpio que transmite frescura masculina y mucha versatilidad.', 118.00, 'images/perfumes/masculinos/acqua-di-gio.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'Acqua di Gio Pour Homme 50ml', 'Version fresca y ligera del clasico masculino, perfecta para oficina y clima calido.', 86.00, 'images/perfumes/masculinos/acqua-di-gio.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'Dior Homme Intense 100ml', 'Iris, cacao suave y maderas elegantes en un perfume masculino sofisticado y con presencia.', 148.00, 'images/perfumes/masculinos/dior-homme-intense.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'Dior Homme Intense 50ml', 'Formato compacto con caracter refinado, fondo amaderado y salida moderna para hombre.', 112.00, 'images/perfumes/masculinos/dior-homme-intense.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'CH Men Carolina Herrera 100ml', 'Notas dulces, cuero suave y maderas en un perfume masculino elegante y urbano.', 98.00, 'images/perfumes/masculinos/ch-men.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'CH Men Carolina Herrera 50ml', 'Version practica con perfil calido y moderno, ideal para tarde o noche.', 78.00, 'images/perfumes/masculinos/ch-men.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'Moon Water Men Eau de Parfum 100ml', 'Fragancia masculina fresca con vibra marina, limpia y juvenil para uso diario.', 42.00, 'images/perfumes/masculinos/moon-water-men.jpg', @cat_masculinos, 'Disponible'),
+('producto', 'For Men Eau de Toilette 100ml', 'Colonia masculina clasica con salida limpia y fondo suave para quien busca algo sencillo y funcional.', 39.00, 'images/perfumes/masculinos/for-men-classic.jpg', @cat_masculinos, 'Disponible');
 
--- Infantiles (10)
+-- Infantil (10) con imagenes locales reales de colonias suaves
 INSERT INTO perfumeria_total (tipo, nombre_titulo, contenido_texto, precio, clave_imagen, relacion_id, estado) VALUES
-('producto', 'Baby Tous', 'Colonia suave para bebe con aroma limpio.', 30.00, 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?auto=format&fit=crop&w=900&q=80', @cat_infantil, 'Disponible'),
-('producto', 'Mustela Musti', 'Aroma delicado pensado para piel sensible.', 22.00, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80', @cat_infantil, 'Disponible'),
-('producto', 'Nenuco Original', 'Citrico suave y muy fresco para ninos.', 12.00, 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=902&q=80', @cat_infantil, 'Disponible'),
-('producto', 'Petit Cheri', 'Floral ligero infantil con salida suave.', 18.00, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=901&q=80', @cat_infantil, 'Disponible'),
-('producto', '1916 Bebe', 'Colonia tradicional fresca para uso diario.', 16.00, 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?auto=format&fit=crop&w=901&q=80', @cat_infantil, 'Disponible'),
-('producto', 'Frozen Kids', 'Notas dulces frutales con aroma ligero.', 18.00, 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=902&q=80', @cat_infantil, 'Disponible'),
-('producto', 'Hello Kitty Pink', 'Frutal suave con toque divertido.', 17.00, 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?auto=format&fit=crop&w=906&q=80', @cat_infantil, 'Disponible'),
-('producto', 'Baby Magic Soft', 'Aroma a talco muy suave y limpio.', 15.00, 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?auto=format&fit=crop&w=907&q=80', @cat_infantil, 'Disponible'),
-('producto', 'Chicco Baby Moments', 'Notas calmantes y limpias para bebe.', 19.00, 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=903&q=80', @cat_infantil, 'Disponible'),
-('producto', 'Johnsons Baby Cologne', 'Clasico aroma infantil suave y fresco.', 10.00, 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?auto=format&fit=crop&w=904&q=80', @cat_infantil, 'Disponible');
+('producto', 'Johnsons Baby Cologne 200ml', 'Colonia infantil fresca y suave con aroma limpio, pensada para despues del bano.', 12.00, 'images/perfumes/infantil/johnsons-baby-cologne.jpg', @cat_infantil, 'Disponible'),
+('producto', 'Johnsons Baby Cologne 100ml', 'Presentacion practica de aroma delicado, ligero y agradable para uso diario.', 8.00, 'images/perfumes/infantil/johnsons-baby-cologne.jpg', @cat_infantil, 'Disponible'),
+('producto', 'Mustela Musti Eau de Soin 50ml', 'Fragancia infantil delicada con sensacion limpia, floral suave y muy respetuosa.', 24.00, 'images/perfumes/infantil/mustela-musti.png', @cat_infantil, 'Disponible'),
+('producto', 'Mustela Musti Fragancia Delicada 50ml', 'Aroma suave para bebe con salida fresca y perfil calmado, ideal para piel sensible.', 24.00, 'images/perfumes/infantil/mustela-musti.png', @cat_infantil, 'Disponible'),
+('producto', 'Nenuco Original Agua de Colonia 650ml', 'Clasico aroma infantil citrico y limpio, muy reconocido para el cuidado diario.', 11.00, 'images/perfumes/infantil/nenuco-original.jpg', @cat_infantil, 'Disponible'),
+('producto', 'Nenuco Original Agua de Colonia 240ml', 'Version mediana del aroma tradicional infantil con sensacion fresca y familiar.', 7.00, 'images/perfumes/infantil/nenuco-original.jpg', @cat_infantil, 'Disponible'),
+('producto', 'Johnsons Baby Cologne Fresh 200ml', 'Fragancia infantil muy suave con sensacion de limpieza y frescura despues del bano.', 12.00, 'images/perfumes/infantil/johnsons-baby-cologne.jpg', @cat_infantil, 'Disponible'),
+('producto', 'Mustela Musti Agua Suave 50ml', 'Colonia ligera para bebe con perfil fino, limpio y calmante.', 24.00, 'images/perfumes/infantil/mustela-musti.png', @cat_infantil, 'Disponible'),
+('producto', 'Nenuco Original Familiar 650ml', 'Colonia infantil tradicional con toque citrico y caracter fresco para toda la familia.', 11.00, 'images/perfumes/infantil/nenuco-original.jpg', @cat_infantil, 'Disponible'),
+('producto', 'Johnsons Baby Cologne Suave 100ml', 'Presentacion pequena con aroma infantil limpio y muy agradable para uso cotidiano.', 8.00, 'images/perfumes/infantil/johnsons-baby-cologne.jpg', @cat_infantil, 'Disponible');
