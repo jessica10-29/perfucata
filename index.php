@@ -2,6 +2,9 @@
 header('Content-Type: text/html; charset=utf-8');
 include 'db_connect.php';
 
+// DEBUG: Si hay problemas, ve a check.php para diagnosticar
+// http://localhost/perfucata/check.php
+
 // Asegurar columnas para descuentos y flags
 $schemaUpdates = [
     "ALTER TABLE perfumeria_total ADD COLUMN IF NOT EXISTS descuento DECIMAL(5,2) DEFAULT 0.00",

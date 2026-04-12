@@ -11,8 +11,14 @@ temp_*
 uploads/
 images/
 
-# Archivos de configuración específicos del servidor
+# Archivos de documentación específicos del proyecto
+README.md
 INFINITYFREE_SETUP.md
+CONFIG_INSTRUCTIONS.md
+
+# Archivos de verificación (eliminar después de usar)
+diagnostico.php
+check.php
 
 # Archivos de sistema
 .DS_Store

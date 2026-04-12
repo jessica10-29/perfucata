@@ -1,0 +1,16 @@
+# Configuración básica para localhost
+
+# Proteger archivos sensibles
+<Files "config_db.php">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+<Files "admin_credentials.txt">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+# Configuración PHP básica
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
