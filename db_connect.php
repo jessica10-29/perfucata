@@ -13,11 +13,16 @@ if ($isLocalhost) {
     $password = "";
     $dbname = "perfucata";
 } else {
-    // Configuración para INFINITYFREE (actualiza con tus credenciales reales)
-    $servername = "localhost"; // InfinityFree usa localhost
-    $username = "if0_41640364_perfucata"; // Reemplaza con tu usuario
-    $password = "tu_contraseña_aqui"; // Reemplaza con tu contraseña
-    $dbname = "if0_41640364_perfucata"; // Reemplaza con tu nombre de BD
+    // Configuración para SERVIDOR REMOTO - Cargar desde archivo seguro
+    if (file_exists('config_db.php')) {
+        include 'config_db.php';
+    } else {
+        // Valores por defecto si no existe el archivo (para evitar errores)
+        $servername = "localhost";
+        $username = "usuario_por_defecto";
+        $password = "contraseña_por_defecto";
+        $dbname = "base_por_defecto";
+    }
 }
 
 $conn = new mysqli($servername, $username, $password, $dbname);

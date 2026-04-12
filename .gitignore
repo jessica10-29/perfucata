@@ -1,0 +1,16 @@
+# Archivos sensibles que NO deben subirse al repositorio
+config_db.php
+admin_credentials.txt
+
+# Archivos temporales
+*.tmp
+*.log
+temp_*
+
+# Directorios de uploads (pueden ser grandes)
+uploads/
+images/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
