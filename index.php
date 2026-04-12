@@ -281,6 +281,98 @@ foreach ($carouselSeeds as $seed) {
         </section>
     </section>
 
+    <!-- ============================================
+         SECCIONES ESPECTACULARES Y ÚTILES
+         ============================================ -->
+
+    <!-- Estadísticas Espectaculares -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item glass-card">
+                <div class="stat-number"><?php echo $conn->query("SELECT COUNT(*) c FROM perfumeria_total WHERE tipo='producto'")->fetch_assoc()['c']; ?></div>
+                <div class="stat-label">Fragancias Premium</div>
+            </div>
+            <div class="stat-item glass-card">
+                <div class="stat-number"><?php echo $conn->query("SELECT COUNT(*) c FROM perfumeria_total WHERE tipo='categoria'")->fetch_assoc()['c']; ?></div>
+                <div class="stat-label">Categorías Exclusivas</div>
+            </div>
+            <div class="stat-item glass-card">
+                <div class="stat-number"><?php echo $conn->query("SELECT COUNT(*) c FROM perfumeria_total WHERE tipo='producto' AND descuento>0")->fetch_assoc()['c']; ?></div>
+                <div class="stat-label">Ofertas Activas</div>
+            </div>
+            <div class="stat-item glass-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Años de Experiencia</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Por Qué Elegirnos -->
+    <section class="features-section">
+        <div class="section-head">
+            <h2>¿Por qué elegir Aura Essence?</h2>
+            <p>Descubre lo que nos hace únicos en el mundo de la perfumería de lujo</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3>Calidad Premium</h3>
+                <p>Curamos exclusivamente fragancias de las mejores casas perfumistas del mundo, garantizando autenticidad y excelencia.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3>Envío Express</h3>
+                <p>Entrega rápida y segura en toda Colombia. Tu fragancia llega en perfectas condiciones, lista para enamorar.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3>Asesoría Personalizada</h3>
+                <p>Nuestro equipo de expertos te guía para encontrar el aroma perfecto según tu personalidad y ocasiones especiales.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Garantía de Autenticidad</h3>
+                <p>Todos nuestros productos son 100% originales con certificados de autenticidad incluidos.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Atención al Cliente</h3>
+                <p>Servicio personalizado las 24 horas. Tu satisfacción es nuestra prioridad absoluta.</p>
+            </div>
+            <div class="feature-card glass-card">
+                <div class="feature-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3>Regalos Especiales</h3>
+                <p>Embalaje elegante y regalos sorpresa en compras especiales. Cada experiencia es memorable.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section glass-card">
+        <div class="newsletter-content">
+            <div class="newsletter-text">
+                <h3>Únete a nuestra comunidad olfativa</h3>
+                <p>Recibe las últimas novedades, consejos de perfumería y ofertas exclusivas directamente en tu correo.</p>
+            </div>
+            <form class="newsletter-form" action="#" method="post">
+                <input type="email" name="email" placeholder="Tu correo electrónico" required>
+                <button type="submit" class="btn-gold">Suscribirme</button>
+            </form>
+        </div>
+    </section>
+
     <?php if ($doSearch && $results && $results->num_rows > 0): ?>
         <section class="products" id="resultados">
             <div class="section-head">
