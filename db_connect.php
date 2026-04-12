@@ -16,11 +16,27 @@ if ($isLocalhost) {
     ini_set('display_errors', 1);
 } else {
     // SERVIDOR (InfinityFree)
-    if (file_exists(__DIR__ . '/config.php')) {
-        include __DIR__ . '/config.php';
-    } else {
+    $configFile = __DIR__ . '/secure/config.php';
+    if (!file_exists($configFile)) {
+        $configFile = __DIR__ . '/config.php';
+    }
+
+    if (!file_exists($configFile)) {
         die("Error: Falta config.php");
     }
+
+    $config = include $configFile;
+    if (!is_array($config)) {
+        die("Error: Configuración inválida.");
+    }
+
+    $servername = $config['DB_HOST'] ?? $config['DB_HOST_LOCAL'] ?? '';
+    $username = $config['DB_USER'] ?? $config['DB_USER_LOCAL'] ?? '';
+    $password = $config['DB_PASS'] ?? $config['DB_PASS_LOCAL'] ?? '';
+    $dbname = $config['DB_NAME'] ?? $config['DB_NAME_LOCAL'] ?? '';
+
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 }
 
 // Conexión

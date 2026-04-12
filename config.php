@@ -8,7 +8,7 @@ return [
     'DB_HOST_LOCAL' => getenv('DB_HOST_LOCAL') ?: '127.0.0.1',
     'DB_USER_LOCAL' => getenv('DB_USER_LOCAL') ?: 'root',
     'DB_PASS_LOCAL' => getenv('DB_PASS_LOCAL') ?: '',
-    'DB_NAME_LOCAL' => getenv('DB_NAME_LOCAL') ?: 'universidad',
+    'DB_NAME_LOCAL' => getenv('DB_NAME_LOCAL') ?: 'perfucata',
 
     // Producción (InfinityFree) - completa estos antes de subir
 'DB_HOST' => getenv('DB_HOST') ?: 'sql300.infinityfree.com',
