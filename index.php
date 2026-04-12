@@ -298,11 +298,11 @@ foreach ($carouselSeeds as $seed) {
             </div>
             <div class="stat-item glass-card">
                 <div class="stat-number"><?php echo $conn->query("SELECT COUNT(*) c FROM perfumeria_total WHERE tipo='producto' AND descuento>0")->fetch_assoc()['c']; ?></div>
-                <div class="stat-label">Ofertas Activas</div>
+                <div class="stat-label">Ofertas Disponibles</div>
             </div>
             <div class="stat-item glass-card">
-                <div class="stat-number">5</div>
-                <div class="stat-label">Años de Experiencia</div>
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Servicio al Cliente</div>
             </div>
         </div>
     </section>
@@ -342,20 +342,6 @@ foreach ($carouselSeeds as $seed) {
                 <h3>Garantía de Autenticidad</h3>
                 <p>Todos nuestros productos son 100% originales con certificados de autenticidad incluidos.</p>
             </div>
-            <div class="feature-card glass-card">
-                <div class="feature-icon">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <h3>Atención al Cliente</h3>
-                <p>Servicio personalizado las 24 horas. Tu satisfacción es nuestra prioridad absoluta.</p>
-            </div>
-            <div class="feature-card glass-card">
-                <div class="feature-icon">
-                    <i class="fas fa-gift"></i>
-                </div>
-                <h3>Regalos Especiales</h3>
-                <p>Embalaje elegante y regalos sorpresa en compras especiales. Cada experiencia es memorable.</p>
-            </div>
         </div>
     </section>
 
@@ -363,8 +349,8 @@ foreach ($carouselSeeds as $seed) {
     <section class="newsletter-section glass-card">
         <div class="newsletter-content">
             <div class="newsletter-text">
-                <h3>Únete a nuestra comunidad olfativa</h3>
-                <p>Recibe las últimas novedades, consejos de perfumería y ofertas exclusivas directamente en tu correo.</p>
+                <h3>Descubre el mundo de la perfumería</h3>
+                <p>Suscríbete para recibir consejos exclusivos y las mejores ofertas en fragancias premium.</p>
             </div>
             <form class="newsletter-form" action="#" method="post">
                 <input type="email" name="email" placeholder="Tu correo electrónico" required>
