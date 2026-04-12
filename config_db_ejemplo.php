@@ -1,15 +1,22 @@
 <?php
-// EJEMPLO DE CONFIGURACIÓN PARA INFINITYFREE
-// Copia este contenido y pégalo en config_db.php en tu servidor
+// Mostrar errores (solo para pruebas, luego puedes quitarlo)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$servername = "localhost"; // NO CAMBIES ESTO
-$username = "if0_41640364"; // Tu usuario real
-$password = "MI_CONTRASEÑA_REAL"; // ← PON TU CONTRASEÑA REAL AQUÍ
-$dbname = "if0_41640364_perfucata"; // Tu base de datos real
+// DATOS DE INFINITYFREE (ajusta el hostname)
+$servername = "sql300.infinityfree.com"; // ⚠️ CAMBIA esto por el real
+$username   = "if0_41640364";
+$password   = "0UWIMxGfpNg";
+$dbname     = "if0_41640364_perfucata";
 
-// INSTRUCCIONES:
-// 1. Sube este archivo a tu servidor InfinityFree
-// 2. Cámbialo el nombre a config_db.php
-// 3. Reemplaza "MI_CONTRASEÑA_REAL" con tu contraseña real
-// 4. Si tu usuario o BD son diferentes, actualízalos
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Validar conexión
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
+}
+
+// Opcional: configurar charset
+$conn->set_charset("utf8");
 ?>
