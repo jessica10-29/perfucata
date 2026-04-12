@@ -15,11 +15,11 @@ if ($isLocalhost) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 } else {
-    // SERVIDOR REMOTO - Cargar credenciales desde config_db.php
-    if (file_exists(__DIR__ . '/config_db.php')) {
-        include __DIR__ . '/config_db.php';
+    // SERVIDOR REMOTO - Cargar credenciales desde config.php
+    if (file_exists(__DIR__ . '/config.php')) {
+        include __DIR__ . '/config.php';
     } else {
-        die("Error de configuración: Falta el archivo config_db.php");
+        die("Error de configuración: Falta el archivo config.php");
     }
 }
 
