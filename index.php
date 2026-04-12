@@ -284,42 +284,6 @@ foreach ($carouselSeeds as $seed) {
     <!-- ============================================
          SECCIONES ESPECTACULARES Y ÚTILES
          ============================================ -->
-    <section class="features-section">
-        <div class="section-head">
-            <h2>¿Por qué elegir Aura Essence?</h2>
-            <p>Descubre lo que nos hace únicos en el mundo de la perfumería de lujo</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card glass-card">
-                <div class="feature-icon">
-                    <i class="fas fa-crown"></i>
-                </div>
-                <h3>Calidad Premium</h3>
-                <p>Curamos exclusivamente fragancias de las mejores casas perfumistas del mundo, garantizando autenticidad y excelencia.</p>
-            </div>
-            <div class="feature-card glass-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shipping-fast"></i>
-                </div>
-                <h3>Envío Express</h3>
-                <p>Entrega rápida y segura en toda Colombia. Tu fragancia llega en perfectas condiciones, lista para enamorar.</p>
-            </div>
-            <div class="feature-card glass-card">
-                <div class="feature-icon">
-                    <i class="fas fa-user-md"></i>
-                </div>
-                <h3>Asesoría Personalizada</h3>
-                <p>Nuestro equipo de expertos te guía para encontrar el aroma perfecto según tu personalidad y ocasiones especiales.</p>
-            </div>
-            <div class="feature-card glass-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>Garantía de Autenticidad</h3>
-                <p>Todos nuestros productos son 100% originales con certificados de autenticidad incluidos.</p>
-            </div>
-        </div>
-    </section>
 
     <?php if ($doSearch && $results && $results->num_rows > 0): ?>
         <section class="products" id="resultados">
