@@ -398,17 +398,17 @@ nav a:hover, nav a.active { color: var(--gold); }
 .carousel {
     width: 100%;
     max-width: 100%;
-    height: 80px;
+    height: 60px;
     overflow: hidden;
     position: relative;
-    border-radius: 16px;
-    margin: 16px auto 20px;
+    border-radius: 12px;
+    margin: 12px auto 16px;
     box-shadow: var(--shadow-lg);
 }
 .top-carousel {
     max-width: 100%;
     height: 100%;
-    min-height: 80px;
+    min-height: 60px;
     margin: 0;
     animation: fadeInUp 1.4s ease-out 0.4s both;
 }
@@ -452,18 +452,18 @@ nav a:hover, nav a.active { color: var(--gold); }
 }
 .carousel-price-tag {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    right: 8px;
+    bottom: 8px;
     z-index: 2;
-    padding: 6px 10px;
+    padding: 4px 8px;
     border-radius: 999px;
     background: rgba(18, 18, 18, 0.72);
     border: 1px solid rgba(246, 215, 119, 0.22);
     color: #f7e3a2;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 0.03em;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
 }
 .carousel-caption strong {
     color: #f6d777;
@@ -643,8 +643,8 @@ th { background: rgba(251, 191, 36, 0.1); color: var(--gold); }
     header h1 { font-size: 1.8rem; margin-bottom: 10px; }
     nav { display:flex; justify-content:center; flex-wrap:wrap; }
     nav a { margin: 5px 10px; font-size: 0.9rem; margin-left: 0; }
-    .carousel { height: 60px; width: 100%; margin: 12px auto; }
-    .top-carousel { min-height: 60px; }
+    .carousel { height: 40px; width: 100%; margin: 10px auto; }
+    .top-carousel { min-height: 40px; }
     .carousel-price-tag {
         right: 8px;
         bottom: 8px;
