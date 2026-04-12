@@ -1,33 +1,15 @@
-# Archivos sensibles que NO deben subirse al repositorio
+# NO SUBIR SECRETOS
+config_db.php
 admin_credentials.txt
-
-# Variables de entorno (secrets) - NO subir credenciales al código
-# Las credenciales se configuran como variables de entorno en el servidor
 
 # Archivos temporales
 *.tmp
 *.log
 temp_*
 
-# Directorios de uploads (pueden ser grandes)
+# Uploads e imágenes (pueden ser grandes)
 uploads/
 images/
-
-# Archivos de documentación específicos del proyecto
-README.md
-SECRETS_SETUP.md
-ENVIRONMENT_VARS.md
-
-# Archivos de configuración antiguos (ya no se usan)
-config_db.php
-config_db_ejemplo.php
-INFINITYFREE_SETUP.md
-CONFIG_INSTRUCTIONS.md
-INFINITYFREE_FIX.md
-
-# Archivos de verificación (eliminar después de usar)
-diagnostico.php
-check.php
 
 # Archivos de sistema
 .DS_Store
