@@ -1,5 +1,5 @@
 # Archivos sensibles que NO deben subirse al repositorio
-config_db.php
+# config_db.php - ⚠️ ESTE ARCHIVO CONTIENE INSTRUCCIONES PARA EL SERVIDOR
 admin_credentials.txt
 
 # Archivos temporales
@@ -15,6 +15,10 @@ images/
 README.md
 INFINITYFREE_SETUP.md
 CONFIG_INSTRUCTIONS.md
+INFINITYFREE_FIX.md
+
+# Archivos de ejemplo (subir pero renombrar en servidor)
+config_db_ejemplo.php
 
 # Archivos de verificación (eliminar después de usar)
 diagnostico.php
