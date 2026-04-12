@@ -11,6 +11,9 @@ temp_*
 uploads/
 images/
 
+# Archivos de configuración específicos del servidor
+INFINITYFREE_SETUP.md
+
 # Archivos de sistema
 .DS_Store
 Thumbs.db
