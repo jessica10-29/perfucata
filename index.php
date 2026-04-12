@@ -284,30 +284,6 @@ foreach ($carouselSeeds as $seed) {
     <!-- ============================================
          SECCIONES ESPECTACULARES Y ÚTILES
          ============================================ -->
-
-    <!-- Estadísticas Espectaculares -->
-    <section class="stats-section">
-        <div class="stats-container">
-            <div class="stat-item glass-card">
-                <div class="stat-number"><?php echo $conn->query("SELECT COUNT(*) c FROM perfumeria_total WHERE tipo='producto'")->fetch_assoc()['c']; ?></div>
-                <div class="stat-label">Fragancias Premium</div>
-            </div>
-            <div class="stat-item glass-card">
-                <div class="stat-number"><?php echo $conn->query("SELECT COUNT(*) c FROM perfumeria_total WHERE tipo='categoria'")->fetch_assoc()['c']; ?></div>
-                <div class="stat-label">Categorías Exclusivas</div>
-            </div>
-            <div class="stat-item glass-card">
-                <div class="stat-number"><?php echo $conn->query("SELECT COUNT(*) c FROM perfumeria_total WHERE tipo='producto' AND descuento>0")->fetch_assoc()['c']; ?></div>
-                <div class="stat-label">Ofertas Disponibles</div>
-            </div>
-            <div class="stat-item glass-card">
-                <div class="stat-number">24/7</div>
-                <div class="stat-label">Servicio al Cliente</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Por Qué Elegirnos -->
     <section class="features-section">
         <div class="section-head">
             <h2>¿Por qué elegir Aura Essence?</h2>
@@ -342,20 +318,6 @@ foreach ($carouselSeeds as $seed) {
                 <h3>Garantía de Autenticidad</h3>
                 <p>Todos nuestros productos son 100% originales con certificados de autenticidad incluidos.</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Newsletter -->
-    <section class="newsletter-section glass-card">
-        <div class="newsletter-content">
-            <div class="newsletter-text">
-                <h3>Descubre el mundo de la perfumería</h3>
-                <p>Suscríbete para recibir consejos exclusivos y las mejores ofertas en fragancias premium.</p>
-            </div>
-            <form class="newsletter-form" action="#" method="post">
-                <input type="email" name="email" placeholder="Tu correo electrónico" required>
-                <button type="submit" class="btn-gold">Suscribirme</button>
-            </form>
         </div>
     </section>
 
