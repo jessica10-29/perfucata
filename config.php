@@ -11,8 +11,8 @@ return [
     'DB_NAME_LOCAL' => getenv('DB_NAME_LOCAL') ?: 'universidad',
 
     // Producción (InfinityFree) - completa estos antes de subir
-'DB_HOST' => getenv('DB_HOST') ?: '',
-    'DB_USER' => getenv('DB_USER') ?: '',
-    'DB_PASS' => getenv('DB_PASS') ?: '',
-    'DB_NAME' => getenv('DB_NAME') ?: '',
+'DB_HOST' => getenv('DB_HOST') ?: 'sql300.infinityfree.com',
+    'DB_USER' => getenv('DB_USER') ?: 'if0_41640364',
+    'DB_PASS' => getenv('DB_PASS') ?: '0UWIMxGfpNg',
+    'DB_NAME' => getenv('DB_NAME') ?: 'if0_41640364_perfuca',
 ];
