@@ -186,6 +186,7 @@ foreach ($carouselSeeds as $seed) {
             <a href="index.php" class="active">Inicio</a>
             <a href="products.php">Fragancias</a>
             <a href="blog.php">Blog</a>
+            <a href="contact.php">Contacto</a>
         </nav>
     </div>
 </header>

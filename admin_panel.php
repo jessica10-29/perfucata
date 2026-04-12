@@ -124,14 +124,21 @@ $categories = $conn->query("SELECT id, nombre_titulo FROM perfumeria_total WHERE
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1 class="highlight-gold">Panel Aura Essence</h1>
-        <nav>
-            <a href="index.php">Ver Sitio</a>
-            <a href="products.php">Fragancias</a>
-            <a href="blog.php">Blog</a>
-            <a href="logout.php" style="color: var(--danger)">Cerrar Sesión</a>
-        </nav>
+    <header class="site-header">
+        <span class="header-spark spark-one" aria-hidden="true"></span>
+        <span class="header-spark spark-two" aria-hidden="true"></span>
+        <span class="header-spark spark-three" aria-hidden="true"></span>
+        <span class="header-scent scent-one" aria-hidden="true"></span>
+        <span class="header-scent scent-two" aria-hidden="true"></span>
+        <div class="header-inner">
+            <h1>Aura Essence</h1>
+            <nav>
+                <a href="index.php">Ver Sitio</a>
+                <a href="products.php">Fragancias</a>
+                <a href="blog.php">Blog</a>
+                <a href="logout.php" style="color: var(--danger)">Cerrar Sesión</a>
+            </nav>
+        </div>
     </header>
 
     <main class="admin-section">

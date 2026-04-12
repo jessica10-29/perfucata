@@ -6,11 +6,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Aura Essence</h1>
-        <nav>
-            <a href="index.php">Regresar al Sitio</a>
-        </nav>
+    <header class="site-header">
+        <span class="header-spark spark-one" aria-hidden="true"></span>
+        <span class="header-spark spark-two" aria-hidden="true"></span>
+        <span class="header-spark spark-three" aria-hidden="true"></span>
+        <span class="header-scent scent-one" aria-hidden="true"></span>
+        <span class="header-scent scent-two" aria-hidden="true"></span>
+        <div class="header-inner">
+            <h1>Aura Essence</h1>
+            <nav>
+                <a href="index.php">Regresar al Sitio</a>
+            </nav>
+        </div>
     </header>
 
     <div class="login-container glass-card">

@@ -12,14 +12,21 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>Carrito de Compras</h1>
-        <nav>
-            <a href="index.php">Inicio</a>
-            <a href="products.php">Fragancias</a>
-            <a href="blog.php">Blog</a>
-            <a href="contact.php">Contacto</a>
-        </nav>
+    <header class="site-header">
+        <span class="header-spark spark-one" aria-hidden="true"></span>
+        <span class="header-spark spark-two" aria-hidden="true"></span>
+        <span class="header-spark spark-three" aria-hidden="true"></span>
+        <span class="header-scent scent-one" aria-hidden="true"></span>
+        <span class="header-scent scent-two" aria-hidden="true"></span>
+        <div class="header-inner">
+            <h1>Aura Essence</h1>
+            <nav>
+                <a href="index.php">Inicio</a>
+                <a href="products.php">Fragancias</a>
+                <a href="blog.php">Blog</a>
+                <a href="contact.php">Contacto</a>
+            </nav>
+        </div>
     </header>
 
     <div class="back-row"><a href="javascript:history.back();" class="btn-outline">← Volver</a></div>
