@@ -1,4 +1,7 @@
 ﻿<?php
+// ============================================
+// CONFIGURACIÓN E INICIALIZACIÓN
+// ============================================
 header('Content-Type: text/html; charset=utf-8');
 include 'db_connect.php';
 
@@ -13,47 +16,80 @@ $schemaUpdates = [
 ];
 foreach ($schemaUpdates as $sql) { $conn->query($sql); }
 
+// ============================================
+// FUNCIONES AUXILIARES
+// ============================================
 function format_cop($value) {
     return '$' . number_format((float)$value, 0, ',', '.');
 }
 
-// Parámetros de búsqueda
+// ============================================
+// PARÁMETROS DE BÚSQUEDA Y FILTROS
+// ============================================
 $q = isset($_GET['q']) ? trim($_GET['q']) : '';
 $category = isset($_GET['category']) ? intval($_GET['category']) : 0;
 $availability = isset($_GET['availability']) ? $_GET['availability'] : '';
 $doSearch = ($q !== '' || $category > 0 || $availability !== '');
 
+// ============================================
+// CARGAR DATOS: CATEGORÍAS Y ESTADÍSTICAS
+// ============================================
 // Nombres para autocompletar
 $nameRes = $conn->query("SELECT nombre_titulo FROM perfumeria_total WHERE tipo='producto' ORDER BY nombre_titulo");
 $allNames = [];
 while ($n = $nameRes->fetch_assoc()) { $allNames[] = $n['nombre_titulo']; }
 
-// Categorías y stats
+// Categorías
 $categories = [];
 $categoryRes = $conn->query("SELECT id, nombre_titulo FROM perfumeria_total WHERE tipo='categoria' ORDER BY nombre_titulo");
 while ($c = $categoryRes->fetch_assoc()) { $categories[] = $c; }
+
+// Estadísticas de categorías
 $catStats = [];
 $statRes = $conn->query("SELECT relacion_id, COUNT(*) total, SUM(CASE WHEN descuento>0 THEN 1 ELSE 0 END) ofertas FROM perfumeria_total WHERE tipo='producto' GROUP BY relacion_id");
 while ($s = $statRes->fetch_assoc()) { $catStats[$s['relacion_id']] = $s; }
 
-// Búsqueda
+// ============================================
+// BÚSQUEDA DE PRODUCTOS
+// ============================================
 $results = null;
 if ($doSearch) {
-    $filters = [];$types='';$params=[];
+    $filters = [];
+    $types = '';
+    $params = [];
     $select = "id, nombre_titulo as name, precio as price, descuento, destacado, recomendado, clave_imagen as image, estado as availability, contenido_texto as description, relacion_id";
     $query = "SELECT $select FROM perfumeria_total WHERE tipo='producto'";
-    if ($q !== '') { $filters[] = "(nombre_titulo LIKE ? OR contenido_texto LIKE ?)"; $types.='ss'; $like="%$q%"; $params[]=$like; $params[]=$like; }
-    if ($category > 0) { $filters[] = "relacion_id = ?"; $types.='i'; $params[]=$category; }
-    if ($availability !== '') { $filters[] = "estado = ?"; $types.='s'; $params[]=$availability; }
+    
+    if ($q !== '') { 
+        $filters[] = "(nombre_titulo LIKE ? OR contenido_texto LIKE ?)"; 
+        $types .= 'ss'; 
+        $like = "%$q%"; 
+        $params[] = $like; 
+        $params[] = $like; 
+    }
+    if ($category > 0) { 
+        $filters[] = "relacion_id = ?"; 
+        $types .= 'i'; 
+        $params[] = $category; 
+    }
+    if ($availability !== '') { 
+        $filters[] = "estado = ?"; 
+        $types .= 's'; 
+        $params[] = $availability; 
+    }
+    
     if ($filters) { $query .= " AND " . implode(' AND ', $filters); }
     $query .= " ORDER BY destacado DESC, descuento DESC, fecha_registro DESC LIMIT 24";
+    
     $stmt = $conn->prepare($query);
     if ($types) { $stmt->bind_param($types, ...$params); }
     $stmt->execute();
     $results = $stmt->get_result();
 }
 
-// Productos destacados del carrusel con precio real
+// ============================================
+// CARRUSEL: DATOS DE PRODUCTOS DESTACADOS
+// ============================================
 $carouselSeeds = [
     [
         'image' => 'images/perfumes/femeninos/chanel-no5.jpg',
@@ -87,6 +123,9 @@ $carouselSeeds = [
     ]
 ];
 
+// ============================================
+// CARRUSEL: OBTENER DATOS DE LA BASE DE DATOS
+// ============================================
 $carouselMap = [];
 $carouselPaths = array_column($carouselSeeds, 'image');
 if (!empty($carouselPaths)) {
@@ -102,6 +141,9 @@ if (!empty($carouselPaths)) {
     }
 }
 
+// ============================================
+// CARRUSEL: CONSTRUIR ITEMS CON PRECIOS
+// ============================================
 $carouselItems = [];
 foreach ($carouselSeeds as $seed) {
     $dbItem = $carouselMap[$seed['image']] ?? null;
@@ -310,4 +352,10 @@ foreach ($carouselSeeds as $seed) {
 </script>
 </body>
 </html>
-<?php if (isset($stmt)) $stmt->close(); $conn->close(); ?>
+<?php 
+// ============================================
+// CERRAR CONEXIÓN
+// ============================================
+if (isset($stmt)) $stmt->close(); 
+$conn->close(); 
+?>
