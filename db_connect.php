@@ -1,6 +1,7 @@
 <?php
-// Configuración automática para localhost y servidores remotos
-// Para InfinityFree: configura config_db.php con tus credenciales reales
+// 🔐 CONFIGURACIÓN USANDO VARIABLES DE ENTORNO (SECRETS)
+// Las credenciales están FUERA del código para máxima seguridad
+// Se sincronizan automáticamente con InfinityFree vía variables de entorno
 
 // Detectar entorno automáticamente
 $isLocalhost = (isset($_SERVER['HTTP_HOST']) &&
@@ -9,7 +10,7 @@ $isLocalhost = (isset($_SERVER['HTTP_HOST']) &&
                  strpos($_SERVER['HTTP_HOST'], 'localhost:') !== false));
 
 if ($isLocalhost) {
-    // Configuración para LOCALHOST (desarrollo)
+    // LOCALHOST: Usar valores por defecto para desarrollo
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -19,15 +20,11 @@ if ($isLocalhost) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 } else {
-    // Configuración para SERVIDOR REMOTO (InfinityFree)
-    // Cargar desde archivo seguro
-    $configFile = __DIR__ . '/config_db.php';
-    if (file_exists($configFile)) {
-        include $configFile;
-    } else {
-        die("Error: Archivo de configuración 'config_db.php' no encontrado.<br>
-             Crea este archivo en tu servidor InfinityFree con tus credenciales.");
-    }
+    // SERVIDOR REMOTO: Usar variables de entorno (secrets)
+    $servername = getenv('DB_HOST') ?: 'localhost';
+    $username = getenv('DB_USER') ?: die('Error: Variable de entorno DB_USER no configurada');
+    $password = getenv('DB_PASS') ?: die('Error: Variable de entorno DB_PASS no configurada');
+    $dbname = getenv('DB_NAME') ?: die('Error: Variable de entorno DB_NAME no configurada');
 
     // No mostrar errores en producción por seguridad
     error_reporting(0);
