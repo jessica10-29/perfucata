@@ -227,15 +227,15 @@ nav a:hover, nav a.active { color: var(--gold); }
 }
 .intro-showcase {
     display: grid;
-    grid-template-columns: minmax(330px, 420px) minmax(0, 1fr);
-    gap: 24px;
-    align-items: stretch;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 20px;
+    align-items: start;
     animation: fadeInUp 1.2s ease-out 0.2s both;
 }
 .top-tools {
     grid-template-columns: 1fr;
     padding: 0;
-    gap: 18px;
+    gap: 16px;
 }
 .top-tools .glass-card {
     background: var(--gold-panel);
@@ -397,8 +397,8 @@ nav a:hover, nav a.active { color: var(--gold); }
 
 .carousel {
     width: 100%;
-    max-width: 1120px;
-    height: 280px;
+    max-width: 100%;
+    height: 240px;
     overflow: hidden;
     position: relative;
     border-radius: 24px;
@@ -406,9 +406,9 @@ nav a:hover, nav a.active { color: var(--gold); }
     box-shadow: var(--shadow-lg);
 }
 .top-carousel {
-    max-width: none;
+    max-width: 100%;
     height: 100%;
-    min-height: 350px; /* Reducido para un carrusel más compacto */
+    min-height: 240px;
     margin: 0;
     animation: fadeInUp 1.4s ease-out 0.4s both;
 }
@@ -657,7 +657,7 @@ th { background: rgba(251, 191, 36, 0.1); color: var(--gold); }
     .section-head { padding:0 5%; }
     .intro-layout { grid-template-columns: 1fr; padding: 24px 6% 10px; }
     .intro-showcase { grid-template-columns: 1fr; }
-    .top-carousel { min-height: 380px; }
+    .top-carousel { min-height: 220px; }
     .panel-grid { grid-template-columns: 1fr; padding: 10px 6% 20px; }
     .category-bar { margin-left: 6%; max-width: none; }
 }
@@ -666,8 +666,8 @@ th { background: rgba(251, 191, 36, 0.1); color: var(--gold); }
     header h1 { font-size: 1.8rem; margin-bottom: 10px; }
     nav { display:flex; justify-content:center; flex-wrap:wrap; }
     nav a { margin: 5px 10px; font-size: 0.9rem; margin-left: 0; }
-    .carousel { height: 260px; width: 100%; margin: 16px auto; }
-    .top-carousel { min-height: 260px; }
+    .carousel { height: 240px; width: 100%; margin: 16px auto; }
+    .top-carousel { min-height: 200px; }
     .carousel-price-tag {
         right: 12px;
         bottom: 12px;
@@ -694,11 +694,22 @@ th { background: rgba(251, 191, 36, 0.1); color: var(--gold); }
     .home-header nav a { font-size: 0.82rem; letter-spacing: 0.08em; }
 }
 @media (max-width: 640px) {
-    .product-grid { padding: 20px 4%; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-    .filters-grid, .search-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .product-grid { padding: 20px 4%; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+    .filters-grid, .search-grid { grid-template-columns: 1fr; }
     .purchase-steps { grid-template-columns: 1fr; }
     .hero { padding: 40px 6% 10px; }
-    .intro-copy h2 { font-size: 2.2rem; }
+    .intro-copy h2 { font-size: 1.8rem; }
+    .top-carousel { min-height: 180px; }
+    .carousel { height: 180px; }
+    .panel-grid { padding: 10px 4% 20px; }
+}
+
+@media (max-width: 480px) {
+    .intro-showcase { grid-template-columns: 1fr; gap: 16px; }
+    .top-carousel { min-height: 160px; }
+    .carousel { height: 160px; margin: 12px auto; }
+    .carousel-price-tag { font-size: 0.85rem; padding: 6px 10px; }
+    .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; padding: 16px 3%; }
 }
 
 @keyframes floatSpark {
